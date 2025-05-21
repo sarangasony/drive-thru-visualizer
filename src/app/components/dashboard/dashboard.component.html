@@ -2,11 +2,11 @@
   <div class="lane-visualizer-container"
        [style.width.px]="VIEWPORT_WIDTH"
        [style.height.px]="VIEWPORT_HEIGHT">
-    <svg [attr.width]="VIEWPORT_WIDTH" [attr.height]="VIEWPORT_HEIGHT">
+    <svg [attr.width]="VIEWPORT_WIDTH" [attr.height]="VIEWPORT_HEIGHT" [ngClass]="{ 'fade-in': fadeSignal(), 'svg-path-class': true }">>
       <path
         [attr.d]="lanePath"
         [attr.stroke-width]="laneWidthPx"
-        stroke="#4CAF50"
+        stroke="#88E788"
         fill="none"
         stroke-linecap="round"
         stroke-linejoin="round"

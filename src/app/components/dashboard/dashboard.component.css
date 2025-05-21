@@ -18,6 +18,11 @@
   overflow: hidden;
 }
 
-svg {
-  display: block;
+.svg-path-class {
+  opacity: 0;
+}
+
+.fade-in {
+  opacity: 1;
+  transition: opacity 0.5s ease-in; 
 }

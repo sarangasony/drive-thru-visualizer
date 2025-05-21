@@ -1,11 +1,11 @@
 // src/app/components/dashboard/dashboard.component.ts
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Lane, Vertex, Coordinates, VertexType } from '../../models/lane.model';
 import { LaneService } from '../../services/lane.service';
 import { ScalingService } from '../../services/scaling.service'; // <-- Import ScalingService
-import { Subscription, filter, switchMap } from 'rxjs';
+import { Subscription, filter, switchMap, tap } from 'rxjs';
 
 // Define a type for your processed vertex data
 interface DisplayVertex {
@@ -35,6 +35,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   private routeSubscription: Subscription | undefined;
 
+  fadeSignal = signal(false);
+
   constructor(
     private route: ActivatedRoute,
     private laneService: LaneService,
@@ -42,17 +44,35 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    // Reset fadeSignal when a new lane load starts
+    this.fadeSignal.set(false);
     this.routeSubscription = this.route.paramMap.pipe(
       filter(params => params.has('id')),
+
+      tap(() => {
+        this.fadeSignal.set(false);
+        // Optional: clear previous lane data immediately to show empty state faster
+        this.currentLane = null;
+        this.lanePath = '';
+        this.laneVertices = [];
+      }),
+
       switchMap(params => {
         const laneId = params.get('id')!;
         return this.laneService.getLane(laneId);
       })
     ).subscribe(lane => {
       this.currentLane = lane;
+
+      
+      setTimeout(() => this.fadeSignal.set(true), 50);
+
       if (this.currentLane) {
         this.processLaneData(this.currentLane);
       }
+    },
+    (error) => {
+      console.error('Error loading lane:', error);
     });
   }
 
@@ -63,7 +83,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   private processLaneData(lane: Lane): void {
     // Call scaleLane with the entire Lane object
     const { scaledVertices, pathData, calculatedLaneWidthPx } = this.scalingService.scaleLane(
-      lane, // <--- PASS THE ENTIRE LANE OBJECT HERE
+      lane, 
       this.VIEWPORT_WIDTH,
       this.VIEWPORT_HEIGHT,
       this.MARGIN_PERCENTAGE
@@ -76,25 +96,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     this.lanePath = pathData;
     this.laneWidthPx = calculatedLaneWidthPx;
-
-    // The transform logic is now handled internally by scaleLane,
-    // which transforms individual points and generates the path.
-    // The svgTransform property is not needed for the overall SVG g element anymore,
-    // as the coordinates themselves are already transformed.
-    // You might still use a translate if you want to apply the general offset *after* scaling,
-    // but the `scaleLane` method already computes and applies all offsets directly to the coordinates.
-    // So, remove or re-evaluate `svgTransform` if it's still being used in your HTML.
-    // If you plan to keep `svgTransform` in HTML, then `scaleLane` needs to return `scale`, `translateX`, `translateY`
-    // instead of pre-scaling vertices and path.
-
-    // Let's re-align with the fact that scaleLane returns *already scaled* coordinates.
-    // So, you don't need a top-level SVG transform if your coordinates are already transformed.
-    // Re-check your HTML for <svg:g [attr.transform]="svgTransform"> and remove it if coordinates are fully processed.
-    // OR if you *do* want a single SVG transform, then the `scaleLane` method should be simplified
-    // to just calculate `scale`, `translateX`, `translateY`, and return those, NOT scaledVertices or pathData.
-
-    // Let's assume for now `scaleLane` provides final, scaled coordinates, and thus `svgTransform` can be removed from HTML.
-    // If you need it, you'll need to refactor `scaleLane` to return { scale, translateX, translateY } only.
   }
 
   // Keep these methods as they are
