@@ -1,0 +1,253 @@
+{
+  "lanes": [
+    {
+      "id": "680bc0",
+      "name": "Lane 1",
+      "vertices": [
+        {
+          "id": 0,
+          "name": "Pre-Warn",
+          "vertexType": "SERVICE_POINT",
+          "isEntry": true,
+          "location": {
+            "coordinates": [
+              18.0,
+              2.0
+            ]
+          },
+          "adjacent": [
+            {
+              "adjacentVertex": 1,
+              "interiorPath": []
+            }
+          ]
+        },
+        {
+          "id": 1,
+          "name": "Order",
+          "vertexType": "SERVICE_POINT",
+          "isEntry": false,
+          "location": {
+            "coordinates": [
+              18.0,
+              7.0
+            ]
+          },
+          "adjacent": [
+            {
+              "adjacentVertex": 2,
+              "interiorPath": [
+                {
+                  "coordinates": [
+                    18,
+                    9.5
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "name": "Cash",
+          "vertexType": "SERVICE_POINT",
+          "isEntry": false,
+          "location": {
+            "coordinates": [
+              8.0,
+              9.5
+            ]
+          },
+          "adjacent": [
+            {
+              "adjacentVertex": 3,
+              "interiorPath": []
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "name": "Present",
+          "isEntry": false,
+          "location": {
+            "coordinates": [
+              0.5,
+              9.5
+            ]
+          },
+          "adjacent": []
+        }
+      ]
+    },
+    {
+      "id": "64958d",
+      "name": "Lane 2",
+      "vertices": [
+        {
+          "id": 0,
+          "name": "Pre-warn 2",
+          "vertexType": "SERVICE_POINT",
+          "isEntry": true,
+          "location": {
+            "coordinates": [
+              2.0,
+              3.0
+            ]
+          },
+          "adjacent": [
+            {
+              "adjacentVertex": 2,
+              "interiorPath": []
+            }
+          ]
+        },
+        {
+          "id": 1,
+          "name": "Pre-warn 1",
+          "vertexType": "SERVICE_POINT",
+          "isEntry": true,
+          "location": {
+            "coordinates": [
+              6.0,
+              1.5
+            ]
+          },
+          "adjacent": [
+            {
+              "adjacentVertex": 3,
+              "interiorPath": []
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "name": "Order 2",
+          "vertexType": "SERVICE_POINT",
+          "isEntry": false,
+          "location": {
+            "coordinates": [
+              2.0,
+              8.0
+            ]
+          },
+          "adjacent": [
+            {
+              "adjacentVertex": 4,
+              "interiorPath": []
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "name": "Order 1",
+          "vertexType": "SERVICE_POINT",
+          "isEntry": false,
+          "location": {
+            "coordinates": [
+              6.0,
+              6.5
+            ]
+          },
+          "adjacent": [
+            {
+              "adjacentVertex": 5,
+              "interiorPath": []
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "name": "Pre-Merge 2",
+          "vertexType": "PRE_MERGE_POINT",
+          "isEntry": false,
+          "location": {
+            "coordinates": [
+              2.0,
+              13.0
+            ]
+          },
+          "adjacent": [
+            {
+              "adjacentVertex": 8,
+              "interiorPath": [
+                {
+                  "coordinates": [
+                    4.0,
+                    13.5
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "name": "Pre-Merge 1",
+          "vertexType": "PRE_MERGE_POINT",
+          "isEntry": false,
+          "location": {
+            "coordinates": [
+              6.0,
+              11.5
+            ]
+          },
+          "adjacent": [
+            {
+              "adjacentVertex": 8,
+              "interiorPath": []
+            }
+          ]
+        },
+        {
+          "id": 6,
+          "name": "Cash",
+          "vertexType": "SERVICE_POINT",
+          "isEntry": false,
+          "location": {
+            "coordinates": [
+              26.0,
+              14.0
+            ]
+          },
+          "adjacent": [
+            {
+              "adjacentVertex": 7,
+              "interiorPath": []
+            }
+          ]
+        },
+        {
+          "id": 7,
+          "name": "Present",
+          "vertexType": "SERVICE_POINT",
+          "isEntry": false,
+          "location": {
+            "coordinates": [
+              36.0,
+              14.0
+            ]
+          },
+          "adjacent": []
+        },
+        {
+          "id": 8,
+          "name": "Lane-Merge",
+          "vertexType": "LANE_MERGE",
+          "isEntry": false,
+          "location": {
+            "coordinates": [
+              7.0,
+              14.0
+            ]
+          },
+          "adjacent": [
+            {
+              "adjacentVertex": 6,
+              "interiorPath": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
