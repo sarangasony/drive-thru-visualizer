@@ -171,8 +171,9 @@ export class ScalingService {
       });
     });
 
-    const calculatedLaneWidthPx = this.LANE_WORLD_WIDTH_METERS * scale;
-
+    const calculatedLaneWidthPx = (worldWidth > 0)
+        ? (this.LANE_WORLD_WIDTH_METERS * scale)
+        : 0;
     return { scaledVertices, pathData, calculatedLaneWidthPx, laneTransform };
   }
 }
