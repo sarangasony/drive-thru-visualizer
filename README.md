@@ -1,59 +1,92 @@
 # DriveThruVisualizer
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.12.
+## 1. Overview
 
-## Development server
+This document provides technical details and instructions for setting up and running the DriveThruVisualizer application. This application is designed to visualize lane data, including vertices and paths, transformed from real-world coordinates to a screen-displayable format. It leverages Angular's reactive programming capabilities for efficient data handling and display.
 
-To start a local development server, run:
+## 2. Key Features
+
+* **Lane Visualization**: Renders complex lane geometries (vertices and paths) on a scalable viewport.
+* **Dynamic Lane Loading**: Loads and displays different lanes based on route parameters, ensuring real-time updates without full page reloads.
+* **Coordinate Transformation**: Automatically scales and positions real-world coordinate data to fit a specified viewport, handling Y-axis flipping for correct display.
+* **Fade-in/Fade-out Transitions**: Provides visual cues during lane loading for a smoother user experience.
+* **Service Point Labeling**: *(To be implemented/verified)* Displays `SERVICE_POINT` names next to markers for enhanced readability.
+
+## 3. Technology Stack
+
+* **Framework**: Angular (19.2.12)
+* **Language**: TypeScript
+* **Reactive Programming**: RxJS
+* **Routing**: Angular Router
+* **HTTP Client**: Angular HttpClient (configured via `provideHttpClient`)
+* **Styling**: CSS/SCSS
+* **Build Tool**: [Angular CLI](https://github.com/angular/angular-cli) version 19.2.12.
+
+
+## 4. Setup and Local Development (Run Instructions)
+
+### 4.1 Prerequisites
+
+Ensure you have the following installed:
+
+* **Node.js**: Version 18.x or higher
+* **npm**: Comes with Node.js
+* **Angular CLI**: Install globally via:
 
 ```bash
-ng serve
+npm install -g @angular/cli
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+### 4.2 Installation Steps
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Clone the repository:
 
 ```bash
-ng generate component component-name
+git clone https://github.com/sarangasony/drive-thru-visualizer.git
+cd drive-thru-visualizer
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Install dependencies:
 
 ```bash
-ng generate --help
+npm install
 ```
 
-## Building
+### 4.3 Running the Application Locally
 
-To build the project run:
+Start the development server:
 
 ```bash
-ng build
+ng start
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Then open your browser at `http://localhost:4200/`. The app will auto-reload upon source changes.
 
-## Running unit tests
+### 4.4 Running Tests
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+* Run unit tests (Karma):
 
 ```bash
 ng test
 ```
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
+* Run end-to-end tests (e.g., Cypress or Playwright if configured):
 
 ```bash
 ng e2e
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## 5. Building for Production
 
-## Additional Resources
+To compile the app for production:
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```bash
+ng build --configuration production
+```
+
+## 6. Deployment Notes
+
+* Ensure production builds are served properly.
+* Configure proper API base URLs via `environment.ts`.
+* Use HTTPS in production.
+

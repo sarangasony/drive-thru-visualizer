@@ -28,9 +28,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   laneVertices: DisplayVertex[] = [];
   lanePath: string = '';
 
-  // Properties for SVG transform, returned directly from service for the SVG transform string
-  svgTransform: string = ''; // No longer directly used as `scaleLane` handles transformations internally
-  laneWidthPx: number = 0; // This will now be directly assigned from the service result
+  svgTransform: string = ''; 
+  laneWidthPx: number = 0;
 
   private routeSubscription: Subscription | undefined;
 
@@ -50,7 +49,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
       tap(() => {
         this.fadeSignal.set(false);
-        // Optional: clear previous lane data immediately to show empty state faster
         this.currentLane = null;
         this.lanePath = '';
         this.laneVertices = [];
@@ -60,18 +58,22 @@ export class DashboardComponent implements OnInit, OnDestroy {
         const laneId = params.get('id')!;
         return this.laneService.getLane(laneId);
       })
-    ).subscribe(lane => {
-      this.currentLane = lane;
+    ).subscribe({ 
+      next: (lane: Lane) => {
+        this.currentLane = lane;
 
-      
-      setTimeout(() => this.fadeSignal.set(true), 50);
+        setTimeout(() => this.fadeSignal.set(true), 50);
 
-      if (this.currentLane) {
-        this.processLaneData(this.currentLane);
+        if (this.currentLane) {
+          this.processLaneData(this.currentLane);
+        }
+      },
+      error: (error: any) => {
+        console.error('Error loading lane:', error);
+      },
+      complete: () => {
+        console.log('Lane loading process completed.');
       }
-    },
-    (error) => {
-      console.error('Error loading lane:', error);
     });
   }
 
@@ -97,7 +99,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.laneWidthPx = calculatedLaneWidthPx;
   }
 
-  // Keep these methods as they are
   getVertexShape(vertexType: VertexType | undefined): string {
     if (vertexType === 'SERVICE_POINT') return 'circle';
     if (vertexType === 'PRE_MERGE_POINT') return 'rect';
@@ -106,10 +107,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   getVertexColor(vertexType: VertexType | undefined): string {
-    if (vertexType === 'SERVICE_POINT') return 'blue';
-    if (vertexType === 'PRE_MERGE_POINT') return 'orange';
-    if (vertexType === 'LANE_MERGE') return 'red';
-    return 'grey'; // Default color
+    if (vertexType === 'SERVICE_POINT') return '#33a2ff';
+    if (vertexType === 'PRE_MERGE_POINT') return '#ffd433';
+    if (vertexType === 'LANE_MERGE') return '#ff5233';
+    return '#c2bdc4'; // Default color
   }
 
   getTrianglePoints(centerX: number, centerY: number, size: number): string {

@@ -55,13 +55,13 @@
           </ng-container>
 
           <svg:text *ngIf="item.vertex.name"
-            [attr.x]="item.screenCoords.coordinates[0] + 20"
-            [attr.y]="item.screenCoords.coordinates[1] + 5"
+            [attr.x]="item.screenCoords.coordinates[0]"
+            [attr.y]="item.screenCoords.coordinates[1] + 30"
             font-size="28px"
             font-weight="bold"
             fill="black"
-            dominant-baseline="middle"
-            text-anchor="start">
+            dominant-baseline="hanging"
+            text-anchor="middle">
             {{ item.vertex.name }}
           </svg:text>
         </svg:g>

@@ -71,17 +71,21 @@ export class ScalingService {
     const effectiveWorldWidth = worldWidth > 0 ? worldWidth : 1;
     const effectiveWorldHeight = worldHeight > 0 ? worldHeight : 1;
 
+    // Calculate the effective viewport dimensions considering the margin
     const effectiveViewportWidth = viewportWidth * (1 - 2 * marginPercentage);
     const effectiveViewportHeight = viewportHeight * (1 - 2 * marginPercentage);
 
+    // Calculate the scale factor based on the effective viewport and world dimensions
     const scaleX = effectiveViewportWidth / effectiveWorldWidth;
     const scaleY = effectiveViewportHeight / effectiveWorldHeight;
 
+    // Use the smaller scale factor to ensure the entire world fits within the viewport
     const scale = Math.min(scaleX, scaleY);
 
     const finalScaledWorldWidth = worldWidth * scale;
     const finalScaledWorldHeight = worldHeight * scale;
 
+    // Calculate the translation offsets to center the world in the viewport
     const translateX = (viewportWidth * marginPercentage) +
                        ((effectiveViewportWidth - finalScaledWorldWidth) / 2) -
                        (minX * scale);
