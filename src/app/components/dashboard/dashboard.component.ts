@@ -7,7 +7,6 @@ import { LaneService } from '../../services/lane.service';
 import { ScalingService } from '../../services/scaling.service'; // <-- Import ScalingService
 import { Subscription, filter, switchMap, tap } from 'rxjs';
 
-// Define a type for your processed vertex data
 interface DisplayVertex {
   vertex: Vertex;
   screenCoords: Coordinates;
