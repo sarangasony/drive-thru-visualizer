@@ -5,6 +5,7 @@
   align-items: center;
   overflow: hidden;
   background-color: #2c3e50;
+  width: 100vw; height: 100vh;
 }
 
 .lane-visualizer-container {
@@ -16,6 +17,7 @@
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  width: 100vw; height: 100vh; flex-grow: 1;
 }
 
 .svg-path-class {
