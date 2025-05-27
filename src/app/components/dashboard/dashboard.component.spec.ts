@@ -97,6 +97,6 @@ describe('DashboardComponent', () => {
   });
 
   it('should display correct vertex color for PRE_MERGE_POINT', () => {
-    expect(component.getVertexColor('PRE_MERGE_POINT')).toBe('orange');
+    expect(component.getVertexColor('PRE_MERGE_POINT')).toBe('#ffd433');
   });
 });
