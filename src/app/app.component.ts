@@ -7,10 +7,10 @@ import { RouterOutlet, RouterModule } from '@angular/router';
   standalone: true,
   imports: [CommonModule, RouterOutlet, RouterModule],
   template: `
-    <!-- <header class="lane-switcher">
+    <header class="lane-switcher">
       <button routerLink="/lane/680bc0" routerLinkActive="active-lane">Lane 1 (ID: 680bc0)</button>
       <button routerLink="/lane/64958d" routerLinkActive="active-lane">Lane 2 (ID: 64958d)</button>
-    </header> -->
+    </header>
     <router-outlet></router-outlet>
   `
 })
